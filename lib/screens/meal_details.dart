@@ -64,6 +64,16 @@ class MealDetails extends StatelessWidget {
                           ),
                         ),
                       ),
+                      Padding(
+                        padding: const EdgeInsets.symmetric(horizontal: 8),
+                        child: Text(
+                          "Fiyat: ${mealdata.price.toString()}₺",
+                          style: const TextStyle(
+                            fontSize: 16, // Malzemeler metni font büyüklüğü
+                            color: Colors.black, // Malzeme metni rengi
+                          ),
+                        ),
+                      ),
                     ],
                   ),
                 ),
