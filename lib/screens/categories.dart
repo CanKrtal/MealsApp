@@ -24,6 +24,7 @@ class Categories extends StatelessWidget {
 
     return Scaffold(
       appBar: AppBar(
+        backgroundColor: Colors.cyan,
         title: const Text("Kategoriler"),
         actions: [
           // TODO: Favoriler sayfasına geçiş..

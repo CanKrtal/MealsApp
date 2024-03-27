@@ -7,5 +7,8 @@ final theme = ThemeData(
         ColorScheme.fromSeed(seedColor: const Color.fromARGB(92, 151, 49, 9)));
 // ThemeData detaylıca araştır.
 void main() {
-  runApp(MaterialApp(theme: theme, home: const Categories()));
+  runApp(MaterialApp(
+      debugShowCheckedModeBanner: false,
+      theme: theme,
+      home: const Categories()));
 }
