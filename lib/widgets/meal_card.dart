@@ -26,21 +26,23 @@ class MealCard extends StatelessWidget {
               placeholder: MemoryImage(kTransparentImage),
               image: NetworkImage(meal.imageUrl),
               fit: BoxFit.cover,
-              height: 200,
+              height: 300,
               width: double.infinity,
             ),
             Positioned(
-                bottom: 0,
-                left: 0,
-                right: 0,
-                child: Center(
-                    child: Text(
+              top: 0,
+              left: 0,
+              right: 0,
+              child: Center(
+                child: Text(
                   meal.name,
                   style: const TextStyle(
                       fontSize: 20,
                       fontWeight: FontWeight.bold,
-                      color: Colors.white),
-                )))
+                      color: Colors.black),
+                ),
+              ),
+            ),
           ],
         ),
       ),

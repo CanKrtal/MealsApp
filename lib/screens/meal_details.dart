@@ -1,27 +1,44 @@
 import 'package:flutter/material.dart';
-import 'package:flutter/widgets.dart';
+import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:mealsapp/models/meal.dart';
+import 'package:mealsapp/providers/fovarites_provider.dart';
 import 'package:transparent_image/transparent_image.dart';
 
-class MealDetails extends StatelessWidget {
+class MealDetails extends ConsumerStatefulWidget {
   const MealDetails({super.key, required this.mealdata});
   final Meal mealdata;
 
   @override
+  _MealDetailsState createState() => _MealDetailsState();
+}
+
+class _MealDetailsState extends ConsumerState<MealDetails> {
+  @override
   Widget build(BuildContext context) {
+    final favorites = ref.watch(favoriteMealsProvider);
     return Scaffold(
       appBar: AppBar(
         backgroundColor: Colors.cyan,
-        centerTitle: true,
         title: const Text("Detaylar"),
+        actions: [
+          IconButton(
+              onPressed: () {
+                ref
+                    .read(favoriteMealsProvider.notifier)
+                    .toggleMealFavorites(widget.mealdata);
+              },
+              icon: Icon(favorites.contains(widget.mealdata)
+                  ? Icons.favorite
+                  : Icons.favorite_border))
+        ],
       ),
       body: Column(
         children: [
           FadeInImage(
             placeholder: MemoryImage(kTransparentImage),
-            image: NetworkImage(mealdata.imageUrl),
+            image: NetworkImage(widget.mealdata.imageUrl),
             fit: BoxFit.cover,
-            height: 200,
+            height: 300,
             width: double.infinity,
           ),
           Expanded(
@@ -37,7 +54,7 @@ class MealDetails extends StatelessWidget {
                       Padding(
                         padding: const EdgeInsets.all(8),
                         child: Text(
-                          mealdata.name,
+                          widget.mealdata.name,
                           style: const TextStyle(
                             fontSize: 20, // Başlık font büyüklüğü
                             fontWeight: FontWeight.bold, // Başlık font tipi
@@ -47,7 +64,7 @@ class MealDetails extends StatelessWidget {
                       Padding(
                         padding: const EdgeInsets.symmetric(horizontal: 8),
                         child: Text(
-                          "Malzemeler: ${mealdata.ingredients.toString()}",
+                          "Malzemeler: ${widget.mealdata.ingredients.toString()}",
                           style: const TextStyle(
                             fontSize: 16, // Malzemeler metni font büyüklüğü
                             color: Colors.black, // Malzeme metni rengi
@@ -57,7 +74,7 @@ class MealDetails extends StatelessWidget {
                       Padding(
                         padding: const EdgeInsets.all(8),
                         child: Text(
-                          "Puanlama: ${mealdata.rating}",
+                          "Puanlama: ${widget.mealdata.rating}",
                           style: const TextStyle(
                             fontSize: 16, // Puanlama metni font büyüklüğü
                             color: Colors.black, // Puan metni rengi
@@ -67,7 +84,7 @@ class MealDetails extends StatelessWidget {
                       Padding(
                         padding: const EdgeInsets.symmetric(horizontal: 8),
                         child: Text(
-                          "Fiyat: ${mealdata.price.toString()}₺",
+                          "Fiyat: ${widget.mealdata.price.toString()}₺",
                           style: const TextStyle(
                             fontSize: 16, // Malzemeler metni font büyüklüğü
                             color: Colors.black, // Malzeme metni rengi
